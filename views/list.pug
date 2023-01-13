@@ -7,5 +7,7 @@ html
             each user in users
                 li
                     h2
-                        a(href='/edit/'+user.userId)= user.name
+                        a(href='/edit/'+ user.userId)= user.name
+                        a(href='/delete/'+ user.userId)= 'Delete'
+
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
+const uuid = require('uuid');
 
 
 // Set up middlewares
@@ -25,7 +26,7 @@ app.get('/', (req, res) => {
 // After user clicks submit
 app.post('/createUser', (req, res) => {
   const user = {
-    userId: Date.now(),
+    userId: uuid.v4(),
     username: req.body.username,
     name: req.body.name,
     email: req.body.email,
@@ -54,15 +55,23 @@ app.post('/edit/:userId', (req, res) => {
   let rawdata = fs.readFileSync('users.json');
   let users = JSON.parse(rawdata);
   let user = users.users.find(user => user.userId == req.params.userId);
+  user.username = req.body.username;
   user.name = req.body.name;
   user.email = req.body.email;
+  user.age = req.body.age;
+
   let data = JSON.stringify(users);
   fs.writeFileSync('users.json', data);
   res.redirect('/list');
 });
 
 app.get('/delete/:userId', (req, res) => {
-  // Delete the user with the specified userId
+
+  let rawdata = fs.readFileSync('users.json');
+  let users = JSON.parse(rawdata);
+  users.users = users.users.filter(user => user.userId !== req.params.userId);
+  let data = JSON.stringify(users);
+  fs.writeFileSync('users.json', data);
   res.redirect('/list');
 });
 
