@@ -1,0 +1,11 @@
+html
+    head 
+        title= title
+        link(rel="stylesheet", href='styles.css')
+    body
+        ul
+            each user in users
+                li
+                    h2
+                        a(href='/users/'+user.name)= user.name
+                    h3 
