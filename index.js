@@ -26,8 +26,10 @@ app.get('/', (req, res) => {
 app.post('/createUser', (req, res) => {
   const user = {
     userId: Date.now(),
+    username: req.body.username,
     name: req.body.name,
     email: req.body.email,
+    age: req.body.age
   };
   users.users.push(user);
   let data = JSON.stringify(users);
@@ -42,12 +44,20 @@ app.get('/list', (req, res) => {
 });
 
 app.get('/edit/:userId', (req, res) => {
-  // Retrieve the user with the specified userId from a file or database
-  res.render('edit', { users: user });
+  let rawdata = fs.readFileSync('users.json');
+  let users = JSON.parse(rawdata);
+  let user = users.users.find(user => user.userId == req.params.userId);
+  res.render('edit', { user });
 });
 
 app.post('/edit/:userId', (req, res) => {
-  // Update the user with the specified userId with the provided form data
+  let rawdata = fs.readFileSync('users.json');
+  let users = JSON.parse(rawdata);
+  let user = users.users.find(user => user.userId == req.params.userId);
+  user.name = req.body.name;
+  user.email = req.body.email;
+  let data = JSON.stringify(users);
+  fs.writeFileSync('users.json', data);
   res.redirect('/list');
 });
 
