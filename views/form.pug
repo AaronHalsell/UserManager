@@ -1,15 +1,23 @@
-form(action="/createUser", method='POST')
-    div     
-        label(for='username') username:
-        input(id='username', name='username')
-    div     
-        label(for='name') name:
-        input(id='name', name='name')
-    div 
-        label(for='email') email:
-        input(id='email', name='email')
-    div 
-        label(for='age') age:
-        input(id='age', name='age')
-    div 
-        input(type='submit' id='submit', value='CreateUser')
+html
+    head 
+        title= title
+        link(rel="stylesheet", href='/styles.css')    
+    body
+        div(class="main-container")
+            div(class="container-header")
+                h1 User List
+            form(action="/createUser", method='POST')
+                div     
+                    label(for='username') username:
+                    input(id='username', name='username')
+                div     
+                    label(for='name') name:
+                    input(id='name', name='name')
+                div 
+                    label(for='email') email:
+                    input(id='email', name='email')
+                div 
+                    label(for='age') age:
+                    input(id='age', name='age')
+                div 
+                    input(type='submit' id='submit', value='CreateUser')

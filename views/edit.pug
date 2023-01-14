@@ -1,17 +1,25 @@
-form(action="/edit/" + user.userId, method='POST')
-    div     
-        label(for='username') username:
-        input(id='username', name='username', value=user.username)
-    div     
-        label(for='name') name:
-        input(id='name', name='name', value=user.name)
-    div 
-        label(for='email') email:
-        input(id='email', name='email', value=user.email)
-    div 
-        label(for='age') age:
-        input(id='age', name='age', value=user.age)
-    div 
-        input(type='hidden', name='userId', value=user.userId)
-    div 
-        input(type='submit', value='Edit User')
+html
+    head 
+        title= title
+        link(rel="stylesheet", href='/styles.css')        
+    body
+        div(class="main-container")
+            div(class="container-header")
+                h1 User List
+            form(action="/edit/" + user.userId, method='POST')
+                div     
+                    label(for='username') username:
+                    input(id='username', name='username', value=user.username)
+                div     
+                    label(for='name') name:
+                    input(id='name', name='name', value=user.name)
+                div 
+                    label(for='email') email:
+                    input(id='email', name='email', value=user.email)
+                div 
+                    label(for='age') age:
+                    input(id='age', name='age', value=user.age)
+                div 
+                    input(type='hidden', name='userId', value=user.userId)
+                div 
+                    input(type='submit', value='Edit User')
